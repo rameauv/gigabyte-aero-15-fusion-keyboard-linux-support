@@ -13,7 +13,7 @@ int main() {
   modeDataToUi(currentModeData, initialState);
   MyAppComponent myAppComponent = MyAppComponent(initialState, service);
 
-  myAppComponent.loop();
+  // myAppComponent.loop();
 
   return 0;
 }
