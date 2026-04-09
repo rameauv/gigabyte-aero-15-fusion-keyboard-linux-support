@@ -1,0 +1,15 @@
+module(
+    name = "gigabyte_aero_15_fusion_keyboard_linux_support",
+    version = "0.1.0",
+)
+
+bazel_dep(name = "platforms", version = "0.0.10")
+bazel_dep(name = "rules_cc", version = "0.2.17")
+
+bazel_dep(name = "libusb", version = "1.0.28")
+
+bazel_dep(
+    name = "ftxui",
+    version = "6.1.9",
+)
+
