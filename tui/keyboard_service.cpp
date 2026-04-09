@@ -16,7 +16,10 @@ bool KeyboardService::getCurrentMode(ModeData &outMode) {
     apiUninit(&api);
     return false;
   }
-  apiUninit(&api);
+  if (apiUninit(&api) != API_OK) {
+    printf("failed to uninint");
+    return false;
+  }
   return true;
 }
 

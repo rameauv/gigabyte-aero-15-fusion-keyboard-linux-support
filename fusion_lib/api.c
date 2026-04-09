@@ -3,6 +3,7 @@
 #include "commands.h"
 #include "enums.h"
 
+#include <cstdio>
 #include <libusb.h>
 #include <stdio.h>
 
