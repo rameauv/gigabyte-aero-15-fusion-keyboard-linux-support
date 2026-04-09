@@ -22,7 +22,7 @@ MyAppComponent::MyAppComponent(UiState &state, std::shared_ptr<KeyboardService> 
   this->modeRadiobox      = Radiobox(&this->modes_, &this->state_.selectedMode);
   this->modeColorRadiobox = Radiobox(&this->colors_, &this->state_.selectedModeColor);
   this->brightnessSlider  = Slider("Brightness:", &this->state_.selectedBrightness, 0, 50, 1);
-  this->speedSlider       = Slider("Speed:     ", &this->state_.selectedSpeed, 0, 50, 1);
+  this->speedSlider       = Slider("Speed:     ", &this->state_.selectedSpeed, 0, 10, 1);
 
   auto apply = [this] {
     if (this->service_ == nullptr) {
