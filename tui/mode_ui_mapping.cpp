@@ -10,7 +10,7 @@ void uiToModeData(const UiState &state, ModeData &out) {
   out.mode       = static_cast<std::uint8_t>(MODE_ENTRIES.at(state.selectedMode).value);
   out.color      = static_cast<std::uint8_t>(MODE_COLOR_ENTRIES.at(state.selectedModeColor).value);
   out.brightness = static_cast<std::uint8_t>(std::clamp(state.selectedBrightness, 0, 50));
-  out.speed      = static_cast<std::uint8_t>(std::clamp(state.selectedSpeed, 0, 50));
+  out.speed      = static_cast<std::uint8_t>(std::clamp(10 - state.selectedSpeed, 0, 10));
 }
 
 namespace {
@@ -51,7 +51,7 @@ void modeDataToUi(const ModeData &modeData, UiState &state) {
     hasUnknownValues        = true;
   }
   state.selectedBrightness = std::clamp(static_cast<int>(modeData.brightness), 0, 50);
-  state.selectedSpeed      = std::clamp(static_cast<int>(modeData.speed), 0, 50);
+  state.selectedSpeed      = std::clamp(static_cast<int>(10 - modeData.speed), 0, 10);
 
   if (hasUnknownValues) {
     state.status = "Device returned unknown mode/color; defaulted to first entries";

@@ -11,6 +11,9 @@ static libusb_device_handle *getDeviceHandle(Api *pApi);
 static int initDevice(Api *pApi);
 static int initLibusb(Api *pApi);
 
+#define KEYBOARD_VID 0x1044
+#define KEYBOARD_PID 0x7a39
+
 int apiInit(Api *pApi) {
   if (pApi == NULL) {
     return -1;
@@ -67,63 +70,12 @@ int apiSetMode(ModeData *pMode, Api *pApi) {
   return API_OK;
 }
 
-static ApiBool isValidRgbKeyboard(libusb_device *pDevice) {
-  int ret;
-  struct libusb_device_descriptor desc;
-
-  ret = libusb_get_device_descriptor(pDevice, &desc);
-  if (ret < 0) {
-    fprintf(stderr, "failed to get device descriptor");
-    return (0);
-  }
-  printf("vid:%x, pid:%x\n", desc.idVendor, desc.idProduct);
-  if (desc.idVendor == 0x1044 && desc.idProduct == 0x7A39)
-    return 1;
-  return 0;
-}
-
-static libusb_device_handle *getDeviceHandle(Api *pApi) {
-  if (pApi == NULL) {
-    return NULL;
-  }
-  libusb_device **devs;
-  libusb_device *device;
-  ssize_t cnt;
-  int i;
-  libusb_device_handle *devHandle = NULL;
-  int ret                         = -15;
-
-  cnt = libusb_get_device_list(NULL, &devs);
-  if (cnt < 0) {
-    return NULL;
-  }
-
-  for (i = 0; devs[i]; ++i) {
-    if (isValidRgbKeyboard(devs[i])) {
-      device = devs[i];
-      for (int i = 0; i < 30 && ret != 0; i++) {
-        printf("try to open device:%d\n", i);
-        ret = libusb_open(device, &devHandle);
-      }
-      printf("ret_handle:%d\n", ret);
-      if (LIBUSB_SUCCESS == ret) {
-        return devHandle;
-      }
-      return NULL;
-    }
-  }
-
-  libusb_free_device_list(devs, 1);
-  return NULL;
-}
-
 static int initDevice(Api *pApi) {
   if (pApi == NULL) {
     return -1;
   }
-  int r = 0;
-  // pApi->dev_handle = getDeviceHandle(pApi);
-  pApi->dev_handle = libusb_open_device_with_vid_pid(pApi->_ctx, 0x1044, 0x7a39);
+  int r            = 0;
+  pApi->dev_handle = libusb_open_device_with_vid_pid(pApi->_ctx, KEYBOARD_VID, KEYBOARD_PID);
   if (pApi->dev_handle == NULL) {
     printf("Failed to open device!\n");
     libusb_exit(pApi->_ctx);
