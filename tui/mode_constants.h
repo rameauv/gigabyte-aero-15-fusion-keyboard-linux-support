@@ -7,12 +7,12 @@
 
 struct ModeEntry {
   Mode value;
-  std::string label;
+  std::string_view label;
 };
 
 struct ModeColorEntry {
   ModeColor value;
-  std::string label;
+  std::string_view label;
 };
 
 inline constexpr std::array MODE_ENTRIES = {
