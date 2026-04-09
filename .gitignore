@@ -1,0 +1,4 @@
+/bazel-*
+external
+.bazelrc.user
+compile_commands.json

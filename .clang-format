@@ -1,0 +1,19 @@
+BasedOnStyle: LLVM
+
+# Pointer and reference alignment
+PointerAlignment: Right
+ReferenceAlignment: Right
+
+# Line length
+ColumnLimit: 120
+
+# Bracing style (K&R - opening braces on same line)
+BreakBeforeBraces: Attach
+
+# Include sorting and grouping
+IncludeBlocks: Regroup
+
+AlignConsecutiveAssignments: true
+
+BreakBinaryOperations: OnePerLine
+BreakBeforeBinaryOperators: true

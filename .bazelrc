@@ -1,0 +1,13 @@
+try-import %workspace%/.bazelrc.user
+build --color=yes
+build --show_timestamps
+build --features=external_include_paths
+build --force_pic
+
+# Fortify source only works with optimized builds.
+build:release --copt=-U_FORTIFY_SOURCE
+build:release --copt=-D_FORTIFY_SOURCE=3
+
+# Strip unneeded symbols in release to make the binary smaller
+build:release --strip=always
+
