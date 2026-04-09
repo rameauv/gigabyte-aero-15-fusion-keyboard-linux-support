@@ -3,7 +3,7 @@
 #include "fusion_lib/enums.h"
 
 #include <array>
-#include <string>
+#include <string_view>
 
 struct ModeEntry {
   Mode value;
