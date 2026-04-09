@@ -1,4 +1,3 @@
-#include "tui/keyboard_service.h"
 #include "tui/my_app_component.h"
 #include "tui/mode_ui_mapping.h"
 
@@ -6,9 +5,6 @@
 
 int main() {
   std::shared_ptr<KeyboardService> service = std::make_shared<KeyboardService>();
-  if (!service->isReady()) {
-    return -1;
-  }
   UiState initialState;
   ModeData currentModeData;
   if (!service->getCurrentMode(currentModeData)) {

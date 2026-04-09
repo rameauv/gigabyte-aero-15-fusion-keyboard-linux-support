@@ -6,10 +6,6 @@
 
 class KeyboardService {
 public:
-  KeyboardService();
-  ~KeyboardService();
-
-  bool isReady() const;
   const std::string &lastError() const;
 
   bool getCurrentMode(ModeData &outMode);
@@ -17,6 +13,5 @@ public:
 
 private:
   Api api_{};
-  bool isReady_{false};
   std::string lastError_;
 };

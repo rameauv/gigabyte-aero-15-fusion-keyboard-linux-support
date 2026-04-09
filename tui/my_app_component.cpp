@@ -25,7 +25,7 @@ MyAppComponent::MyAppComponent(UiState &state, std::shared_ptr<KeyboardService> 
   this->speedSlider       = Slider("Speed:     ", &this->state_.selectedSpeed, 0, 50, 1);
 
   auto apply = [this] {
-    if (this->service_ == nullptr || !this->service_->isReady()) {
+    if (this->service_ == nullptr) {
       this->state_.status = "Service is not ready";
       return;
     }
@@ -38,7 +38,7 @@ MyAppComponent::MyAppComponent(UiState &state, std::shared_ptr<KeyboardService> 
     this->state_.status = "Applied successfully";
   };
   auto refresh = [this] {
-    if (this->service_ == nullptr || !this->service_->isReady()) {
+    if (this->service_ == nullptr) {
       this->state_.status = "Service is not ready";
       return;
     }
