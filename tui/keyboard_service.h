@@ -1,6 +1,6 @@
 #pragma once
 
-#include "fusion_lib/api.h"
+#include "fusion_lib/commands.h"
 
 #include <string>
 
@@ -12,6 +12,5 @@ public:
   bool setMode(const ModeData &modeData);
 
 private:
-  Api api_{};
   std::string lastError_;
 };
