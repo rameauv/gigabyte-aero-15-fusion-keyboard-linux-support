@@ -2,11 +2,12 @@
 
 #include "fusion_lib/api.h"
 #include "fusion_lib/commands.h"
+#include <cstdio>
 
 const std::string &KeyboardService::lastError() const { return lastError_; }
 
 bool KeyboardService::getCurrentMode(ModeData &outMode) {
-  Api api;
+  Api api{};
   if (apiInit(&api) != API_OK) {
     lastError_ = "Failed to initialize API";
     return false;
@@ -16,12 +17,11 @@ bool KeyboardService::getCurrentMode(ModeData &outMode) {
     apiUninit(&api);
     return false;
   }
-  apiUninit(&api);
   return true;
 }
 
 bool KeyboardService::setMode(const ModeData &modeData) {
-  Api api;
+  Api api{};
   if (apiInit(&api) != API_OK) {
     lastError_ = "Failed to initialize API";
     return false;

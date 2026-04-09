@@ -55,6 +55,7 @@ CmdGetCurrModeResult cmdGetCurrMode(libusb_device_handle *pHandle,
   header.color       = 0x00;
   header.reserved2   = 0x00;
   finHeader(&header);
+  printf("get current mode %p \n", pHandle);
   int r = libusb_control_transfer(pHandle, 0x21, 0x09, 0x0300, 0x0003,
                                   (uint8_t *)&header, 0x0008, 0);
   if (r < 0) {

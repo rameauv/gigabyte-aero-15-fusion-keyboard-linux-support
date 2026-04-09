@@ -18,7 +18,7 @@ int apiInit(Api *pApi) {
   int r = 0;
 
   if (pApi->_init)
-    return 0;
+    return API_OK;
   pApi->_ctx       = NULL;
   pApi->dev_handle = NULL;
   r                = initLibusb(pApi);
@@ -122,8 +122,8 @@ static int initDevice(Api *pApi) {
     return -1;
   }
   int r = 0;
-  // pApi->dev_handle = getDeviceHandle(pApi);
-  pApi->dev_handle = libusb_open_device_with_vid_pid(pApi->_ctx, 0x1044, 0x7a39);
+  pApi->dev_handle = getDeviceHandle(pApi);
+  // pApi->dev_handle = libusb_open_device_with_vid_pid(pApi->_ctx, 0x1044, 0x7a39);
   if (pApi->dev_handle == NULL) {
     printf("Failed to open device!\n");
     libusb_exit(pApi->_ctx);
@@ -148,6 +148,7 @@ static int initDevice(Api *pApi) {
     printf("Failed to claim interface! %d\n", r);
     return 2;
   }
+  printf("init device done\n");
   return API_OK;
 }
 
