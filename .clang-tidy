@@ -1,0 +1,80 @@
+---
+# clang-tidy configuration for PS Vita Game of Life
+# Tailored for embedded C development with C2x standard
+
+# Only analyze files matching this pattern (exclude SDK and external libraries)
+HeaderFilterRegex: '(src|include)/.*\.(h|c)$'
+
+# Check categories and specific checks
+Checks: >
+  -*,
+  bugprone-*,
+  -bugprone-easily-swappable-parameters,
+  -bugprone-assignment-in-if-condition,
+  clang-analyzer-*,
+  -clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling,
+  readability-*,
+  -readability-identifier-length,
+  -readability-function-cognitive-complexity,
+  -readability-magic-numbers,
+  -readability-avoid-const-params-in-decls,
+  performance-*,
+  cert-*,
+  -cert-err33-c,
+  -cert-dcl37-c,
+  -cert-dcl51-cpp,
+  misc-*,
+  -misc-unused-parameters,
+  -misc-no-recursion,
+  portability-*,
+  -cppcoreguidelines-*,
+  -modernize-*,
+  -google-*,
+  -llvm-*,
+  -fuchsia-*,
+  -hicpp-*,
+  -objc-*
+
+# Warning options
+WarningsAsErrors: ''
+FormatStyle: file
+
+# Check-specific options
+CheckOptions:
+  # Naming conventions (adjust to match your style)
+  - key: readability-identifier-naming.FunctionCase
+    value: camelBack
+  - key: readability-identifier-naming.VariableCase
+    value: camelBack
+  - key: readability-identifier-naming.ParameterCase
+    value: camelBack
+  - key: readability-identifier-naming.PointerParameterPrefix
+    value: 'p'
+  - key: readability-identifier-naming.MacroCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.EnumConstantCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.ConstexprVariableCase
+    value: UPPER_CASE
+  - key: readability-identifier-naming.StructCase
+    value: CamelCase
+  - key: readability-identifier-naming.TypedefCase
+    value: CamelCase
+  
+  # Performance options
+  - key: performance-move-const-arg.CheckTriviallyCopyableMove
+    value: false
+  
+  # Readability options
+  - key: readability-function-size.LineThreshold
+    value: 200
+  - key: readability-function-size.StatementThreshold
+    value: 150
+  - key: readability-braces-around-statements.ShortStatementLines
+    value: 2
+  
+  # Misc options
+  - key: misc-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPublic
+    value: true
+
+

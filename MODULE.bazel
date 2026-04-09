@@ -1,0 +1,14 @@
+module(
+    name = "ftxui_bazel_demo",
+    version = "0.1.0",
+)
+
+bazel_dep(name = "rules_cc", version = "0.2.17")
+
+bazel_dep(name = "libusb", version = "1.0.28")
+
+bazel_dep(
+    name = "ftxui",
+    version = "6.1.9",
+)
+

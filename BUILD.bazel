@@ -1,0 +1,36 @@
+load("@rules_cc//cc:defs.bzl", "cc_binary")
+package(default_visibility = ["//visibility:public"])
+
+cc_library(
+    name = "fusion_lib",
+    srcs = [
+      "fusion_lib/api.c",
+      "fusion_lib/commands.c",
+    ],
+    hdrs = [
+      "fusion_lib/commands.h",
+      "fusion_lib/enums.h",
+      "fusion_lib/api.h",
+    ],
+    visibility = ["//visibility:public"],
+    deps = ["@libusb//:libusb"],
+)
+
+cc_binary(
+    name = "tui",
+    srcs = [
+      "tui/main.cpp",
+      "tui/keyboard_service.cpp",
+      "tui/keyboard_service.h",
+      "tui/mode_constants.h",
+      "tui/mode_ui_mapping.cpp",
+      "tui/mode_ui_mapping.h",
+      "tui/my_app_component.cpp",
+      "tui/my_app_component.h",
+    ],
+     copts = [
+        "-std=c++23",
+        "-fexperimental-library"
+    ],
+    deps = ["@ftxui//:component", ":fusion_lib"],
+)
