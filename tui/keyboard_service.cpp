@@ -2,7 +2,6 @@
 
 #include "fusion_lib/api.h"
 #include "fusion_lib/commands.h"
-#include <cstdio>
 
 const std::string &KeyboardService::lastError() const { return lastError_; }
 
@@ -17,6 +16,7 @@ bool KeyboardService::getCurrentMode(ModeData &outMode) {
     apiUninit(&api);
     return false;
   }
+  apiUninit(&api);
   return true;
 }
 
