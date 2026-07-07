@@ -10,6 +10,6 @@ bazel_dep(name = "libusb", version = "1.0.28")
 
 bazel_dep(
     name = "ftxui",
-    version = "6.1.9",
+    version = "7.0.0",
 )
 
